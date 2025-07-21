@@ -28,21 +28,30 @@
   CurrentVisibility: Editable
   MaxVisibility: Editable
   ScriptInputsHidden:
-    cameraTransform: false
-    navObject: false
+    camera: false
+    navObject1: false
+    navObject2: false
+    navObject3: false
     navigationWorldDepth: false
+    rightHand: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
   DefaultScriptInputs:
     - navigationWorldDepth: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
-      navObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      cameraTransform: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      navObject1: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      navObject2: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      navObject3: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input AssignableType navigationWorldDepth
-    - // @input SceneObject navObject
-    - // @input SceneObject cameraTransform
+    - // @input SceneObject navObject1
+    - // @input SceneObject navObject2
+    - // @input SceneObject navObject3
+    - // @input Component.Camera camera
+    - // @input SceneObject rightHand

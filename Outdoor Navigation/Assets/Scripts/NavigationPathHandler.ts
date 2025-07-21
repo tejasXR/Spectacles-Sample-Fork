@@ -1,5 +1,4 @@
 import { NavigationWorldDepth } from "./NavigationWorldDepth";
-import {TextLogger} from "Text Logger V2/TextLogger/TextLogger/TextLogger";
 
 @component
 export class NavigationPathHandler extends BaseScriptComponent {
@@ -10,10 +9,19 @@ export class NavigationPathHandler extends BaseScriptComponent {
     public navigationWorldDepth: NavigationWorldDepth;
 
     @input
-    public navObject: SceneObject;
+    public navObject1: SceneObject;
+
+    @input 
+    public navObject2: SceneObject;
+
+     @input 
+    public navObject3: SceneObject;
 
     @input
-    cameraTransform: SceneObject;
+    camera: Camera;
+
+    @input
+    rightHand: SceneObject;
 
     private isFistClosed: boolean; 
     private handPosition : vec3;
@@ -24,7 +32,6 @@ export class NavigationPathHandler extends BaseScriptComponent {
      
         this.createEvent('OnStartEvent').bind(() => this.onStart());
         Studio.log("Hands closed");
-
     }
 
     onStart()
@@ -53,16 +60,25 @@ export class NavigationPathHandler extends BaseScriptComponent {
         .getGrabEndEvent(GestureModule.HandType.Right)
         .add((grabEndArgs: GrabEndArgs) => 
         {
-            if (!this.isFistClosed)
-            {
-                return;
-            }
+            // if (!this.isFistClosed)
+            // {
+            //     return;
+            // }
+
+            // let camera = global.deviceInfoSystem.getTrackingCameraForId(CameraModule.CameraId.Left_Color);
 
             Studio.log("Creating nav path");
 
+        
             var rayStart = this.handPosition;
-            var rayEnd = this.cameraTransform.getTransform().forward
-                .add(this.cameraTransform.getTransform().down);
+            var forwardDirection = this.rightHand.getTransform().forward.uniformScale(120);
+            var downwardDirection = this.rightHand.getTransform().down.uniformScale(100)
+            var handPosition = this.rightHand.getTransform().getWorldPosition();
+ 
+            var rayEnd = handPosition.add(forwardDirection).add(downwardDirection);
+
+            this.navObject1.getTransform().setWorldPosition(rayStart);
+            this.navObject2.getTransform().setWorldPosition(rayEnd);
 
             this.navigationWorldDepth.onStartHitTest(rayStart, rayEnd);
 
@@ -74,9 +90,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
     onCreateNavPath(groundPoint:vec3)
     {
         // Draw points
-        Studio.log(groundPoint);
-        // global.textLogger.
-
-        this.navObject.getTransform().setWorldPosition(groundPoint);
+    
+        this.navObject3.getTransform().setWorldPosition(groundPoint);
     }
 }
