@@ -3,7 +3,7 @@ const WorldQueryModule = require('LensStudio:WorldQueryModule');
 @component
 export class NavigationWorldDepth extends BaseScriptComponent {
 
-    public onGetGroundPointCallback?: (groundPoint : vec3) => void;
+    public onGetGroundPointCallback?: (groundPoint : vec3, groundNormal : vec3) => void;
 
     private hitTestSession : HitTestSession;
 
@@ -37,7 +37,7 @@ export class NavigationWorldDepth extends BaseScriptComponent {
         const hitPosition = results.position;
         const hitNormal = results.normal;
 
-        this.onGetGroundPointCallback(hitPosition);
+        this.onGetGroundPointCallback(hitPosition, hitNormal);
 
         //identifying the direction the object should look at based on the normal of the hit location.
 

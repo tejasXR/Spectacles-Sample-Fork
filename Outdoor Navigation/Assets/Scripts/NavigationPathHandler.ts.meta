@@ -29,6 +29,8 @@
   MaxVisibility: Editable
   ScriptInputsHidden:
     camera: false
+    groundForwardDepth: false
+    lineCreator: false
     navObject1: false
     navObject2: false
     navObject3: false
@@ -39,7 +41,9 @@
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
   DefaultScriptInputs:
-    - navigationWorldDepth: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+    - groundForwardDepth: !<float> 0.000000
+      navigationWorldDepth: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      lineCreator: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       navObject1: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       navObject2: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       navObject3: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
@@ -49,7 +53,9 @@
     -
       {}
   InputLines:
+    - // @input float groundForwardDepth
     - // @input AssignableType navigationWorldDepth
+    - // @input AssignableType_1 lineCreator
     - // @input SceneObject navObject1
     - // @input SceneObject navObject2
     - // @input SceneObject navObject3
