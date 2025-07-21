@@ -4,11 +4,22 @@
     - !<own> 00000000-0000-0065-0000-000000000064
     - !<own> 0005641c-028d-459a-0000-000000014b4d
     - !<own> 00cca4cc-0c35-40f4-a25d-fbceea04a905
+    - !<own> c6e5cddc-26f6-40cb-b836-da1294a2fd9b
     - !<own> d1583ee4-a7ed-4727-a912-a62530c0984d
     - !<own> aa4c9644-7e91-4fd9-a405-4c02157e2375
+    - !<own> 5563fb78-a854-4bb9-8818-1590065fc268
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
-      []
+      - |
+        id: 9
+        name: Layer 1
+        color: 0
+
+      - |
+        id: 13
+        name: Layer 2
+        color: 1
+
     HasOrtho: true
   RenderOutput: !<reference> 923415f5-4245-4675-ade1-6d69d6d23e71
   RenderPreviewOutput: !<reference> 923415f5-4245-4675-ade1-6d69d6d23e71
@@ -125,8 +136,6 @@
   DecayType: None
   DecayLimit: false
   DecayRange: 40.000000
-  UseEstimation: false
-  EstimationIntensity: !<float> 1.000000
 - !<SceneObject/00056e79-b066-62ca-0000-000000001406>
   PrefabRemaps:
     []
@@ -175,8 +184,6 @@
   DecayType: None
   DecayLimit: false
   DecayRange: 40.000000
-  UseEstimation: false
-  EstimationIntensity: !<float> 1.000000
 - !<SceneObject/00617313-3a7b-4df9-98b9-5cf5584f6fba>
   PrefabRemaps:
     []
@@ -333,6 +340,25 @@
     - !<own> aedf5dfb-cf45-4cbb-8b05-785ed2a02327
   Components:
     []
+- !<ScriptComponent/01658f1d-1bd7-40b3-8124-52efc1676840>
+  PrefabRemaps:
+    []
+  Name: MapPalmAnchor
+  Enabled: true
+  ScriptAsset: !<reference> a16342b6-c046-414f-af25-4886ccaa9370
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      mapObject: !<reference.SceneObject> b602b57e-35d3-4105-9104-6cfbeb5a7b71
+      rightHand: !<reference.SceneObject> c59ade77-507d-4696-9cd8-fcd244b4152a
+      heightOffset: !<float> 5.000000
+      forwardOffset: !<float> 10.000000
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/01dd1c60-8098-4833-915d-cf534d39b0c0>
   PrefabRemaps:
     []
@@ -477,6 +503,7 @@
   ScriptAsset: !<reference> f9b29b39-ec8c-41bd-8b53-769ae9b818b8
   ScriptInputsDefault:
     selectVisual: true
+    handMeshRenderOrder: true
     autoJointMapping: true
     wrist: true
     thumbToWrist: true
@@ -505,6 +532,7 @@
     pinkyUpperJoint: true
     pinkyTip: true
     shouldThumbPokeGlow: true
+    tipGlowRenderOrder: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -513,6 +541,7 @@
       selectVisual: Default
       handInteractor: !<MappingBased.AssignableType> 75e72a30-933b-43b2-8219-7c49f0c7611a
       handMesh: !<reference.RenderMeshVisual> 225e9ea5-b7ee-4e9f-9936-54a3ab838a65
+      handMeshRenderOrder: !<float> 9999.000000
       root: !<reference.SceneObject> 489e124a-3c4f-433b-a263-168c7ab1bd96
       autoJointMapping: true
       wrist: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
@@ -550,6 +579,7 @@
       tapProximityThreshold: !<float> 8.000000
       pinchTexture: !<reference.Texture> 3391429c-5c74-4b5c-b9fc-4ad3ba30bda4
       tapTexture: !<reference.Texture> e33d2c7f-1d12-4250-92fb-433c25ce1923
+      tipGlowRenderOrder: !<float> 10000.000000
       handOutlineMaterial: !<reference.Material> 7ac80b6c-979a-4a00-a694-099f296be161
       handOccluderMaterial: !<reference.Material> 5d5c762b-f0dd-4c06-b76f-bcb8f8fb525f
   ScriptTypes:
@@ -752,6 +782,26 @@
     - !<own> 54e58711-0dd2-40d5-9a93-0ee776276cee
   Components:
     []
+- !<RenderMeshVisual/1960a159-ca9c-4934-9bf7-7cb5219f0b73>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    []
+  Mesh: !<reference> 2e5e428e-9a20-4c3f-ad4a-4451f07df611
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<ScriptComponent/1d0baedb-7e65-4ad9-a340-802847bbdaf1>
   PrefabRemaps:
     []
@@ -866,11 +916,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -879,12 +931,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -935,11 +989,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -948,12 +1004,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -1059,6 +1117,22 @@
   ScriptTypes:
     "":
       {}
+- !<ScriptComponent/304a35b5-bc3d-423b-9e7c-e0e1cf856575>
+  PrefabRemaps:
+    []
+  Name: TextLoggerExample
+  Enabled: true
+  ScriptAsset: !<reference> ab070bd2-ef1a-44e9-8e4a-04791f913981
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/32b0e410-bfff-4b5a-9d4b-8426dba22ce0>
   PrefabRemaps:
     []
@@ -1112,11 +1186,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -1125,12 +1201,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -1413,6 +1491,24 @@
   Components:
     - !<own> 3483f959-cda4-4dd0-bd04-a507c9f73c68
     - !<own> 76d81c5c-153b-4f09-a98f-f1a7e1cbc580
+- !<ScriptComponent/44d5c6a4-d056-4ca3-8fb4-21d5eb153eb4>
+  PrefabRemaps:
+    []
+  Name: NavigationPathHandler
+  Enabled: true
+  ScriptAsset: !<reference> d77d0374-00e0-4fb3-9b90-333f77943802
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      navigationWorldDepth: !<MappingBased.AssignableType> 8e0e5641-7807-4351-96df-d93fc631fd17
+      navObject: !<reference.SceneObject> 5563fb78-a854-4bb9-8818-1590065fc268
+      cameraTransform: !<reference.SceneObject> 00000000-0000-0065-0000-000000000064
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/450be3eb-4008-4798-9a71-9f41d597e7bb>
   PrefabRemaps:
     []
@@ -1508,7 +1604,7 @@
   PrefabRemaps:
     []
   Name: "[LEGACY] InteractorLineVisual"
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -1627,11 +1723,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -1640,12 +1738,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -1779,6 +1879,21 @@
     - !<own> 790c4471-a38f-410e-8b01-4fef43dc6a9b
   Components:
     []
+- !<SceneObject/5563fb78-a854-4bb9-8818-1590065fc268>
+  PrefabRemaps:
+    []
+  Name: SphereMesh
+  Enabled: true
+  Layers: 1
+  LocalTransform:
+    position: {x: 0.000000, y: 18.933830, z: 0.000000}
+    rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 1960a159-ca9c-4934-9bf7-7cb5219f0b73
 - !<SceneObject/562dd141-6f81-4676-95af-160f889eaa36>
   PrefabRemaps:
     []
@@ -1880,11 +1995,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -1893,12 +2010,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -1974,11 +2093,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -1987,12 +2108,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -2836,11 +2959,13 @@
   ScriptInputsDefault:
     targetingMode: true
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -2849,12 +2974,14 @@
     "":
       targetingMode: !<float> 3.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -2885,11 +3012,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -2898,12 +3027,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -2967,11 +3098,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -2980,12 +3113,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -3089,6 +3224,22 @@
       showCafeButton: !<MappingBased.AssignableType_8> a1f696f8-fe7d-461a-b804-aed9507d7ea1
       showBarsButton: !<MappingBased.AssignableType_9> f9781527-9f89-448e-afe6-623658d19913
       logObject: !<reference.SceneObject> aa4c9644-7e91-4fd9-a405-4c02157e2375
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/8e0e5641-7807-4351-96df-d93fc631fd17>
+  PrefabRemaps:
+    []
+  Name: NavigationWorldDepth
+  Enabled: true
+  ScriptAsset: !<reference> efa37b7b-58b5-42f8-a15e-44e0e06de551
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
   ScriptTypes:
     "":
       {}
@@ -3220,11 +3371,13 @@
   ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
   ScriptInputsDefault:
     enableInstantDrag: true
+    isScrollable: true
     allowMultipleInteractors: true
     enablePokeDirectionality: true
     acceptableXDirections: true
     acceptableYDirections: true
     acceptableZDirections: true
+    useFilteredPinch: true
     isSynced: true
     acceptableSyncInteractionTypes: true
   ScriptTypesDefault:
@@ -3233,12 +3386,14 @@
     "":
       targetingMode: !<float> 7.000000
       enableInstantDrag: false
+      isScrollable: false
       allowMultipleInteractors: true
       enablePokeDirectionality: false
       acceptableXDirections: !<float> 0.000000
       acceptableYDirections: !<float> 0.000000
       acceptableZDirections: !<float> 1.000000
-      isSynced: true
+      useFilteredPinch: false
+      isSynced: false
       acceptableSyncInteractionTypes: !<float> 7.000000
   ScriptTypes:
     "":
@@ -3457,7 +3612,7 @@
   PrefabRemaps:
     []
   Name: MessagePopUp
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 50.000000, z: 0.000000}
@@ -3565,60 +3720,6 @@
     - !<own> 1f236fc3-83ec-4792-9c0a-dc0b5e52fc7f
   Components:
     []
-- !<ScriptComponent/a39c0a3b-8cec-4e2c-bd32-7415e50579f2>
-  PrefabRemaps:
-    []
-  Name: ContainerFrame
-  Enabled: true
-  ScriptAsset: !<reference> 94ea82ba-1d42-4617-b71f-c92262f5960b
-  ScriptInputsDefault:
-    constantPadding: true
-    relativeZ: true
-    isContentInteractable: true
-    allowTranslation: true
-    cutOut: true
-    minimumSize: true
-    maximumSize: true
-    xOnTranslate: true
-    yOnTranslate: true
-    useSnapping: true
-    itemSnapping: true
-    worldSnapping: true
-    useFOVFollow: true
-    isFollowing: true
-    _enableInteractionPlane: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      autoShowHide: false
-      innerSize: !<Vec2> {x: 10.000000, y: 10.000000}
-      border: !<float> 8.000000
-      constantPadding: !<Vec2> {x: 0.000000, y: 0.000000}
-      allowScaling: false
-      autoScaleContent: false
-      relativeZ: false
-      isContentInteractable: false
-      allowTranslation: true
-      cutOut: false
-      minimumSize: !<Vec2> {x: 10.000000, y: 10.000000}
-      maximumSize: !<Vec2> {x: 300.000000, y: 300.000000}
-      useBillboarding: true
-      xOnTranslate: false
-      xAlways: true
-      yOnTranslate: false
-      yAlways: true
-      useSnapping: false
-      itemSnapping: false
-      worldSnapping: false
-      showFollowButton: true
-      useFOVFollow: false
-      isFollowing: false
-      showCloseButton: false
-      _enableInteractionPlane: false
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/a495a4ea-226e-4f97-8bca-2d1e6d5a8489>
   PrefabRemaps:
     []
@@ -4280,30 +4381,6 @@
     []
   Components:
     - !<own> 225e9ea5-b7ee-4e9f-9936-54a3ab838a65
-- !<ScriptComponent/bf6e0368-4412-4d78-b8f2-4dda8c544c5e>
-  PrefabRemaps:
-    []
-  Name: MapContainerController
-  Enabled: true
-  ScriptAsset: !<reference> b69e19ca-5a74-4540-884b-9b52addd4b50
-  ScriptInputsDefault:
-    translationYTime: true
-    translationZTime: true
-    rotationTime: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      mapComponent: !<MappingBased.AssignableType> c99d4f2c-f5f0-4683-bb28-e2bbf4c7ea40
-      translationXTime: 0.350000
-      translationYTime: 0.350000
-      translationZTime: 0.350000
-      rotationTime: 0.550000
-      minFollowDistance: !<float> 50.000000
-      maxFollowDistance: !<float> 160.000000
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/bfb5f952-c4a1-44b7-b0b8-d34aab541d0d>
   PrefabRemaps:
     []
@@ -4474,6 +4551,24 @@
     - !<own> 78c16349-b182-4d1f-a9a5-bea49ce6ac93
   Components:
     []
+- !<SceneObject/c6e5cddc-26f6-40cb-b836-da1294a2fd9b>
+  PrefabRemaps:
+    - 304a35b5-bc3d-423b-9e7c-e0e1cf856575: f89fa8fc-619c-4d99-832e-d37d33efc5d1
+    - c6e5cddc-26f6-40cb-b836-da1294a2fd9b: aa7b04e3-2831-4de5-b243-efd6ff140899
+    - cc1cae3b-cd97-466e-a645-e1d3e3744b33: 00f82c35-988f-4e6f-88d4-33359394cc55
+    - f4ec5b10-79b7-4748-8b1e-1aff463808f6: 79387deb-58fe-4454-bfc6-ac835bd6e7b3
+  Name: TextLogger
+  Enabled: true
+  Layers: 1
+  LocalTransform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  Children:
+    - !<own> f4ec5b10-79b7-4748-8b1e-1aff463808f6
+  Components:
+    - !<own> cc1cae3b-cd97-466e-a645-e1d3e3744b33
 - !<ScriptComponent/c99d4f2c-f5f0-4683-bb28-e2bbf4c7ea40>
   PrefabRemaps:
     []
@@ -4683,6 +4778,32 @@
     CapitalizationOverride: None
   DepthTest: false
   TwoSided: false
+- !<ScriptComponent/cc1cae3b-cd97-466e-a645-e1d3e3744b33>
+  PrefabRemaps:
+    []
+  Name: TextLogger
+  Enabled: true
+  ScriptAsset: !<reference> 21fdc82d-6c53-4c06-9f5c-6ce477a01432
+  ScriptInputsDefault:
+    loggingEnabled: true
+    logLimit: true
+    logTextSize: true
+    customDisplay: true
+    useStudioLog: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      loggingEnabled: true
+      logColor: !<Vec4> {x: 0.630838, y: 0.821698, z: 0.360967, w: 1.000000}
+      logLimit: 20
+      logTextSize: 25
+      customDisplay: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      useStudioLog: true
+      spectaclesMode: true
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/cce9d9d7-ed16-44e2-85c0-a88a17cfb323>
   PrefabRemaps:
     []
@@ -4822,15 +4943,19 @@
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: -130.000000}
-    rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
+    rotation: {x: 90.000000, y: 270.000000, z: 180.000000}
     scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     hasSegmentScaleCompensation: false
   Children:
     - !<own> ea81eb00-1037-4b63-ad62-9d33be146e3c
     - !<own> 116f28e1-ef55-4a8f-b7e8-3b4aeda6a607
     - !<own> 99dd8e79-ece5-4ac7-88ce-a2693ec8726a
+    - !<own> b602b57e-35d3-4105-9104-6cfbeb5a7b71
   Components:
     - !<own> c99d4f2c-f5f0-4683-bb28-e2bbf4c7ea40
+    - !<own> 01658f1d-1bd7-40b3-8124-52efc1676840
+    - !<own> 44d5c6a4-d056-4ca3-8fb4-21d5eb153eb4
+    - !<own> 8e0e5641-7807-4351-96df-d93fc631fd17
 - !<SceneObject/d68d4811-e2ce-4190-be0a-006a64fb3d44>
   PrefabRemaps:
     []
@@ -4971,7 +5096,7 @@
   PrefabRemaps:
     []
   Name: InteractorCursors
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -5235,7 +5360,7 @@
   PrefabRemaps:
     []
   Name: Container
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -5243,11 +5368,9 @@
     scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     hasSegmentScaleCompensation: false
   Children:
-    - !<own> b602b57e-35d3-4105-9104-6cfbeb5a7b71
     - !<own> 281fe2d5-6e31-4d31-8c61-4a00a354c739
   Components:
-    - !<own> a39c0a3b-8cec-4e2c-bd32-7415e50579f2
-    - !<own> bf6e0368-4412-4d78-b8f2-4dda8c544c5e
+    []
 - !<Text/ea88dc55-7c00-46c7-bd11-4c972d2ba9ca>
   PrefabRemaps:
     []
@@ -5483,6 +5606,21 @@
   ForceCompound: false
   Intangible: false
   ShowCollider: true
+- !<SceneObject/f4ec5b10-79b7-4748-8b1e-1aff463808f6>
+  PrefabRemaps:
+    []
+  Name: "Example usage [DELETE_ME]"
+  Enabled: false
+  Layers: 1
+  LocalTransform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 304a35b5-bc3d-423b-9e7c-e0e1cf856575
 - !<ScriptComponent/f584928b-0bb5-49fb-b782-696ba1cdef9c>
   PrefabRemaps:
     []
@@ -5715,6 +5853,7 @@
   ScriptAsset: !<reference> f9b29b39-ec8c-41bd-8b53-769ae9b818b8
   ScriptInputsDefault:
     selectVisual: true
+    handMeshRenderOrder: true
     autoJointMapping: true
     wrist: true
     thumbToWrist: true
@@ -5743,6 +5882,7 @@
     pinkyUpperJoint: true
     pinkyTip: true
     shouldThumbPokeGlow: true
+    tipGlowRenderOrder: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -5751,6 +5891,7 @@
       selectVisual: Default
       handInteractor: !<MappingBased.AssignableType> 36677c54-25f1-4e3b-a12a-76624b165b80
       handMesh: !<reference.RenderMeshVisual> fda22202-45d2-4777-9adb-d634fcdbd1c0
+      handMeshRenderOrder: !<float> 9999.000000
       root: !<reference.SceneObject> 3ecbf086-f684-43d3-994d-7d6401c14343
       autoJointMapping: true
       wrist: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
@@ -5788,6 +5929,7 @@
       tapProximityThreshold: !<float> 8.000000
       pinchTexture: !<reference.Texture> 3391429c-5c74-4b5c-b9fc-4ad3ba30bda4
       tapTexture: !<reference.Texture> e33d2c7f-1d12-4250-92fb-433c25ce1923
+      tipGlowRenderOrder: !<float> 10000.000000
       handOutlineMaterial: !<reference.Material> 7ac80b6c-979a-4a00-a694-099f296be161
       handOccluderMaterial: !<reference.Material> bb8479b9-021e-4c42-809a-60edf99cbeac
   ScriptTypes:
