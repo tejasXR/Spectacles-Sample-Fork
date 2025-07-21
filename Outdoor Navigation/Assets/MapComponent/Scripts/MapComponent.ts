@@ -420,5 +420,10 @@ export class MapComponent extends BaseScriptComponent {
     this.mapController.clearGeometry();
   }
 
+  getIsMiniMapOn() : boolean
+  {
+    return this.mapController.config.isMiniMap;
+  }
+
   // #endregion
 }
