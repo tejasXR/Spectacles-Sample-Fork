@@ -75,13 +75,13 @@ export class LineCreator extends BaseScriptComponent {
         animatedLineTransform.setWorldPosition(lineStart);
 
         var direction = lineEnd.sub(lineStart);
-        var rotation = quat.rotationFromTo(vec3.up(), direction.normalize());
+        var rotation = quat.rotationFromTo(vec3.forward(), direction.normalize());
         animatedLineTransform.setWorldRotation(rotation);
 
         var distanceToTravel = lineStart.distance(lineEnd);
         var timeInMillisecondsToTravel = distanceToTravel / this.constantAnimationSpeed * 1000;
 
-        animatedLineTransform.setWorldScale(new vec3(5, 10, 1)); 
+        animatedLineTransform.setWorldScale(new vec3(this.animatedLineThickness, 0, this.animatedLineThickness)); 
 
         LSTween.moveFromToWorld
         (
@@ -105,9 +105,13 @@ export class LineCreator extends BaseScriptComponent {
             animatedLineMesh.mainMaterial,
             1,
             0,
-            timeInMillisecondsToTravel / 2
+            this.lineFadeDuration / 2
         )
         .easing(Easing.Sinusoidal.In)
-        .start();
+        .start()
+        .onComplete(()=>
+        {
+            animatedLine.enabled = false;
+        });
     }
 }
