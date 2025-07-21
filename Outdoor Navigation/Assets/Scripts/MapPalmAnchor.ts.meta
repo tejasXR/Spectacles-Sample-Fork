@@ -30,6 +30,7 @@
   ScriptInputsHidden:
     forwardOffset: false
     heightOffset: false
+    mapComponent: false
     mapObject: false
     rightHand: false
   ScriptTypesHidden:
@@ -37,7 +38,8 @@
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
   DefaultScriptInputs:
-    - mapObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+    - mapComponent: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      mapObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       heightOffset: !<float> 0.000000
       forwardOffset: !<float> 0.000000
@@ -45,6 +47,7 @@
     -
       {}
   InputLines:
+    - // @input AssignableType mapComponent
     - // @input SceneObject mapObject
     - // @input SceneObject rightHand
     - // @input float heightOffset

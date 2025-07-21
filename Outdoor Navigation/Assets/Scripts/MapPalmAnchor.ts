@@ -1,7 +1,14 @@
+import { MapController } from "MapComponent/Scripts/MapController";
+import { MapComponent } from "MapComponent/Scripts/MapComponent";
+
+
 @component
 export class MapPalmAnchor extends BaseScriptComponent 
 {
     private gestureModule: GestureModule = require('LensStudio:GestureModule');
+
+    @input
+    public mapComponent : MapComponent;
 
     @input
     public mapObject: SceneObject;
@@ -26,6 +33,11 @@ export class MapPalmAnchor extends BaseScriptComponent
         this.gestureModule
         .getTargetingDataEvent(GestureModule.HandType.Right)
         .add((targetArgs: TargetingDataArgs) => {
+
+            if (!this.mapComponent.getIsMiniMapOn)
+            {
+                return;
+            }
 
             var heightOffset = this.rightHand.getTransform().up.y * this.heightOffset;
             

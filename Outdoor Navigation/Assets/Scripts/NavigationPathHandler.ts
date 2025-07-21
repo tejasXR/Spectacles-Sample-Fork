@@ -1,10 +1,15 @@
+import { MapController } from "MapComponent/Scripts/MapController";
 import { LineCreator } from "./LineCreator";
 import { NavigationWorldDepth } from "./NavigationWorldDepth";
+import { MapComponent } from "MapComponent/Scripts/MapComponent";
 
 @component
 export class NavigationPathHandler extends BaseScriptComponent {
 
     private gestureModule: GestureModule = require('LensStudio:GestureModule');
+
+    @input
+    public mapComponent : MapComponent;
 
     @input
     public groundForwardDepth : number;
@@ -32,7 +37,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
     private isFistClosed: boolean; 
     private handPosition : vec3;
-    private lineStartPosition : vec3;
+    // private lineStartPosition : vec3;
     private firstLineAnimated : boolean;
 
     private groundPoint : vec3;
@@ -55,6 +60,11 @@ export class NavigationPathHandler extends BaseScriptComponent {
         .getGrabBeginEvent(GestureModule.HandType.Right)
         .add((grabBeginArgs: GrabBeginArgs) => 
         {
+            if (!this.mapComponent.getIsMiniMapOn)
+            {
+                return;
+            }
+
             if (!this.isFistClosed)
             {
                 this.isFistClosed = true;
@@ -80,19 +90,21 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
             // let camera = global.deviceInfoSystem.getTrackingCameraForId(CameraModule.CameraId.Left_Color);
 
-            Studio.log("Creating nav path");
-
+             if (!this.mapComponent.getIsMiniMapOn)
+            {
+                return;
+            }
         
-            this.lineStartPosition = this.handPosition.add(this.rightHand.getTransform().down.uniformScale(5));
+            var lineStartPosition = this.handPosition.add(this.rightHand.getTransform().down.uniformScale(5));
             var forwardDirection = this.rightHand.getTransform().forward.uniformScale(120);
             var downwardDirection = this.rightHand.getTransform().down.uniformScale(100)
  
             var rayEnd = this.handPosition.add(forwardDirection).add(downwardDirection);
 
-            this.navObject1.getTransform().setWorldPosition(this.lineStartPosition);
+            this.navObject1.getTransform().setWorldPosition(lineStartPosition);
             this.navObject2.getTransform().setWorldPosition(rayEnd);
 
-            this.navigationWorldDepth.onStartHitTest(this.lineStartPosition, rayEnd);
+            this.navigationWorldDepth.onStartHitTest(lineStartPosition, rayEnd);
 
             this.isFistClosed = false;
             // this.navObject.enabled = false;
@@ -108,11 +120,14 @@ export class NavigationPathHandler extends BaseScriptComponent {
     
         // Draw line from hand to ground
         this.navObject3.getTransform().setWorldPosition(groundPoint);
-        this.lineCreator.createBaseLine(this.lineStartPosition, groundPoint);
-        this.lineCreator.animateLine(this.handPosition, groundPoint);
+
+        var lineStartPosition = groundPoint.add(vec3.up().uniformScale(30));
+
+        this.lineCreator.createBaseLine(lineStartPosition, groundPoint);
+        // this.lineCreator.animateLine(this.handPosition, groundPoint);
 
 
-        var lookDirection: vec3;
+        // var lookDirection: vec3;
         // if (1 - Math.abs(groundNormal.normalize().dot(vec3.up())) < .01) 
         // {
         //     lookDirection = vec3.forward();
@@ -133,17 +148,18 @@ export class NavigationPathHandler extends BaseScriptComponent {
         this.groundForwardPoint = groundForward;
 
         this.lineCreator.createBaseLine(groundPoint, groundForward);
+        this.lineCreator.animateLine(groundPoint, groundForward);
     }
 
     onLineAnimated()
     {
-        if (!this.firstLineAnimated)
-        {
-            this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
-            this.firstLineAnimated = true;
-            return;
-        }
+        // if (!this.firstLineAnimated)
+        // {
+        //     this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
+        //     this.firstLineAnimated = true;
+        //     return;
+        // }
 
-        this.firstLineAnimated = false;
+        // this.firstLineAnimated = false;
     }
 }
