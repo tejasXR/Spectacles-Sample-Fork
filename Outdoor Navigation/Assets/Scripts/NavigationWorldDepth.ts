@@ -5,13 +5,17 @@ export class NavigationWorldDepth extends BaseScriptComponent {
 
     public onGetGroundPointCallback?: (groundPoint : vec3) => void;
 
-    private worldQuery = new WorldQueryModule();
     private hitTestSession : HitTestSession;
+
+    constructor()
+    {
+        super();
+    }
 
     onAwake() 
     {
         // Create a session with default options (currently, filtering disabled by default)
-       this.hitTestSession = this.worldQuery.createHitTestSession();
+       this.hitTestSession = WorldQueryModule.createHitTestSession();
     }
 
     public onStartHitTest(rayStart: vec3, rayEnd: vec3)

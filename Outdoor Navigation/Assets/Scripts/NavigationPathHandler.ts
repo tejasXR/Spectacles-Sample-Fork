@@ -1,11 +1,10 @@
 import { NavigationWorldDepth } from "./NavigationWorldDepth";
-// const SIK = require('SpectaclesInteractionKit.lspkg/SIK').SIK;
+import {TextLogger} from "Text Logger V2/TextLogger/TextLogger/TextLogger";
 
 @component
 export class NavigationPathHandler extends BaseScriptComponent {
 
     private gestureModule: GestureModule = require('LensStudio:GestureModule');
-    
 
     @input
     public navigationWorldDepth: NavigationWorldDepth;
@@ -22,12 +21,15 @@ export class NavigationPathHandler extends BaseScriptComponent {
     constructor()
     {
         super();
+     
         this.createEvent('OnStartEvent').bind(() => this.onStart());
+        Studio.log("Hands closed");
+
     }
 
     onStart()
     {
-        this.navigationWorldDepth.onGetGroundPointCallback.bind(this.onCreateNavPath)
+        this.navigationWorldDepth.onGetGroundPointCallback = (groundPoint) => (this.onCreateNavPath(groundPoint));
 
         this.gestureModule
         .getGrabBeginEvent(GestureModule.HandType.Right)
@@ -35,9 +37,8 @@ export class NavigationPathHandler extends BaseScriptComponent {
         {
             if (!this.isFistClosed)
             {
-                print("Hands closed");
                 this.isFistClosed = true;
-                this.navObject.enabled = true;
+                // this.navObject.enabled = true;
             }
         });
 
@@ -57,21 +58,25 @@ export class NavigationPathHandler extends BaseScriptComponent {
                 return;
             }
 
-            print("Creating nav path");
+            Studio.log("Creating nav path");
 
             var rayStart = this.handPosition;
-            var rayEnd = this.cameraTransform.getTransform().forward.add(this.cameraTransform.getTransform().down);
+            var rayEnd = this.cameraTransform.getTransform().forward
+                .add(this.cameraTransform.getTransform().down);
 
             this.navigationWorldDepth.onStartHitTest(rayStart, rayEnd);
 
             this.isFistClosed = false;
-            this.navObject.enabled = false;
+            // this.navObject.enabled = false;
         });
     }
 
     onCreateNavPath(groundPoint:vec3)
     {
         // Draw points
-        print(groundPoint);
+        Studio.log(groundPoint);
+        // global.textLogger.
+
+        this.navObject.getTransform().setWorldPosition(groundPoint);
     }
 }
