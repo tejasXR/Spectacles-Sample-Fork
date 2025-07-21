@@ -1,14 +1,11 @@
 studioVersion:
   major: 5
   minor: 10
-  patch: 0
-  build: 25052803
+  patch: 1
+  build: 25061003
   type: Public
-  buildFlavor: daily
-  timestamp: 1748395790000
-  commit: d8d1ba109cbeb8b0f3d82cd7cba10686a8a22c82
-coreVersion: 309
-clientVersion: 13.380000
+coreVersion: 313
+clientVersion: 13.420000
 updateCheckpoint: 61
 sceneId: 0a1ccb1a-fe88-4fbb-9883-e3af3c75fd99
 viewConfig:
@@ -21,6 +18,7 @@ viewConfig:
     output: Live
     stereoOutputEye: Center
     deviceTypeOverride: Unknown
+    tint: true
   cameraType: Front
 metaInfo:
   hints:
@@ -30,13 +28,14 @@ metaInfo:
   lensName: Outdoor Navigation
   lensDescriptors:
     - EXPERIMENTAL_API
+    - GEN_AI_ICON
   lensApplicability:
     - Front
     - Back
   lensClientCompatibilities:
     - Spectacles
   platformBundlesEnabled: false
-  iconHash: ""
+  iconHash: 5c062673ae1c60de1b61e76b8d224a24
   videoPreviewHash: ""
   fromTemplateName: Spectacles
   fromTemplateUrl: Lens Studio 5.4.1.24123021
