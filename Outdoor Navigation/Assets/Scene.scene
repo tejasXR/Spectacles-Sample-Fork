@@ -2214,8 +2214,8 @@
       baseLineMaterial: !<reference.Material> 31149b17-dea1-4de0-b33d-ae7e7b51848f
       animatedLineMaterial: !<reference.Material> 9b071099-b726-411e-bf3d-558d140c6662
       lineThickness: !<float> 18.000000
-      animatedLineThickness: !<float> 35.000000
-      constantAnimationSpeed: !<float> 200.000000
+      animatedLineThickness: !<float> 17.000000
+      constantAnimationSpeed: !<float> 500.000000
       lineFadeDuration: !<float> 10000.000000
   ScriptTypes:
     "":
