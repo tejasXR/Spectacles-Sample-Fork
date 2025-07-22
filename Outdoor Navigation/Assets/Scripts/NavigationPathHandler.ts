@@ -1,7 +1,6 @@
-import { MapController } from "MapComponent/Scripts/MapController";
 import { LineCreator } from "./LineCreator";
 import { NavigationWorldDepth } from "./NavigationWorldDepth";
-import { MapComponent } from "MapComponent/Scripts/MapComponent";
+import { MapExpansionController } from "Scripts/MapExpansionController";
 
 @component
 export class NavigationPathHandler extends BaseScriptComponent {
@@ -9,7 +8,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
     private gestureModule: GestureModule = require('LensStudio:GestureModule');
 
     @input
-    public mapComponent : MapComponent;
+    public mapExpansionController : MapExpansionController;
 
     @input
     public groundForwardDepth : number;
@@ -60,7 +59,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
         .getGrabBeginEvent(GestureModule.HandType.Right)
         .add((grabBeginArgs: GrabBeginArgs) => 
         {
-            if (!this.mapComponent.getIsMiniMapOn)
+            if (this.mapExpansionController.hasExpandedMap())
             {
                 return;
             }
@@ -90,7 +89,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
             // let camera = global.deviceInfoSystem.getTrackingCameraForId(CameraModule.CameraId.Left_Color);
 
-             if (!this.mapComponent.getIsMiniMapOn)
+             if (this.mapExpansionController.hasExpandedMap())
             {
                 return;
             }

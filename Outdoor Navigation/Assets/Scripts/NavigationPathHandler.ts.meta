@@ -31,7 +31,7 @@
     camera: false
     groundForwardDepth: false
     lineCreator: false
-    mapComponent: false
+    mapExpansionController: false
     navObject1: false
     navObject2: false
     navObject3: false
@@ -42,7 +42,7 @@
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
   DefaultScriptInputs:
-    - mapComponent: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+    - mapExpansionController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       groundForwardDepth: !<float> 0.000000
       navigationWorldDepth: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       lineCreator: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
@@ -55,7 +55,7 @@
     -
       {}
   InputLines:
-    - // @input AssignableType mapComponent
+    - // @input AssignableType mapExpansionController
     - // @input float groundForwardDepth
     - // @input AssignableType_1 navigationWorldDepth
     - // @input AssignableType_2 lineCreator
