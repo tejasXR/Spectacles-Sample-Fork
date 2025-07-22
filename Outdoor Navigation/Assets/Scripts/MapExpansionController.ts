@@ -100,13 +100,14 @@ export class MapExpansionController extends BaseScriptComponent {
             // if (!this.isLeftPalmUp && !this.isRightPalmUp)
             if (areHandsClose)
             {
-                this.expansionButtons.enabled = false;
+                this.mapComponent.centerMap();
                 this.mapComponent.toggleMiniMap(true);  
+                this.expansionButtons.enabled = false;
                 this.hasExpanded = false;
             }
         }       
 
-        var direction = this.leftHandPosition.sub(this.rightHandPosition);
+        // var direction = this.leftHandPosition.sub(this.rightHandPosition);
         // this.handCloseObj.getTransform().setWorldPosition(this.rightHandPosition.add(direction.uniformScale(.5)))
         // this.handCloseObj.enabled = areHandsClose;
 
