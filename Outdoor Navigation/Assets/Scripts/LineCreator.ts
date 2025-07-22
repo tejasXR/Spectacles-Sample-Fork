@@ -85,10 +85,13 @@ export class LineCreator extends BaseScriptComponent {
         var distanceToTravel = lineStart.distance(lineEnd);
         var timeInMillisecondsToTravel = distanceToTravel / this.constantAnimationSpeed * 1000;
 
-        var currentScale = new vec3(this.animatedLineThickness, this.animatedLineThickness, 0);
+        var currentScale = new vec3(this.animatedLineThickness, 0, 0);
         lineTransform.setWorldScale(currentScale); 
 
         var midPoint = lineStart.add(direction.uniformScale(0.5));
+
+        // var fadeDuration = (timeInMillisecondsToTravel - 5000) < 0 ? 5000 : timeInMillisecondsToTravel;
+        var fadeDuration = 10000;
 
         LSTween.moveFromToWorld
         (
@@ -98,33 +101,37 @@ export class LineCreator extends BaseScriptComponent {
             timeInMillisecondsToTravel
         )
         .easing(Easing.Linear.InOut)
-        .start()
-        .onComplete(()=>{
-           if (this.onLineAnimatedCompleted)
-            {
-                this.onLineAnimatedCompleted();
-                line.destroy();
-            };
-        });
+        .start();
 
         LSTween.scaleFromToWorld
         (
             lineTransform,
             currentScale,
             new vec3(this.animatedLineThickness, length, 0),
-            timeInMillisecondsToTravel - 100
+            timeInMillisecondsToTravel
         )
         .easing(Easing.Linear.InOut)
-        .start();
+        .start()
+        .onComplete(()=>
+        {
+           if (this.onLineAnimatedCompleted)
+            {
+                this.onLineAnimatedCompleted();
+            };
+        });
 
         LSTween.alphaFromTo
         (
             lineMesh.mainMaterial,
             1,
             0,
-            timeInMillisecondsToTravel / 2
+            fadeDuration
         )
         .easing(Easing.Sinusoidal.In)
-        .start();
+        .start()
+        .onComplete(()=>
+        {
+          line.destroy();
+        });
     }
 }

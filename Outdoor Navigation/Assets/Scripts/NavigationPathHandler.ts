@@ -37,12 +37,15 @@ export class NavigationPathHandler extends BaseScriptComponent {
     private isFistClosed: boolean; 
     private handPosition : vec3;
     // private lineStartPosition : vec3;
-    private firstLineAnimated : boolean;
+    private animatedSecondLine : boolean;
 
     private groundPoint : vec3;
     private groundForwardPoint : vec3;
+    private groundRightPoint : vec3;
 
     private lineCreationIndex : number;
+    private linesToAnimate : number;
+    private linesAlreadyAnimated : number;
 
     constructor()
     {
@@ -114,48 +117,56 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
     onCreateNavPath(groundPoint: vec3, groundNormal: vec3)
     {
-        this.groundPoint = groundPoint;
-
         // Line to ground
         var lineStartPosition = groundPoint.add(vec3.up().uniformScale(30));
-        this.lineCreator.createBaseLine(lineStartPosition, groundPoint);
+        // this.lineCreator.createBaseLine(lineStartPosition, groundPoint);
 
         var groundForward : vec3;
+        var groundRight : vec3;
+
         if (this.lineCreationIndex == 0)
         {
             // Forward Line
             groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth));
-            this.lineCreator.createBaseLine(groundPoint, groundForward);
-
-            this.lineCreationIndex = 1;
+            // this.lineCreator.createBaseLine(groundPoint, groundForward);
         }
         else
         {
             // Forward Line
-            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth / 3));
-            this.lineCreator.createBaseLine(groundPoint, groundForward);
+            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth / 2));
+            // this.lineCreator.createBaseLine(groundPoint, groundForward);
 
             // Right Line
-            var groundRight = groundForward.add(vec3.right().uniformScale(this.groundForwardDepth / 3));
-            this.lineCreator.createBaseLine(groundForward, groundRight);
-
-            this.lineCreationIndex = 0;
+            groundRight = groundForward.add(vec3.right().uniformScale(this.groundForwardDepth / 2));
+            // this.lineCreator.createBaseLine(groundForward, groundRight);
         }
-      
+
+        this.groundPoint = groundPoint;
         this.groundForwardPoint = groundForward;
+        this.groundRightPoint = groundRight;
+
+        this.linesToAnimate = this.lineCreationIndex == 0 ? 2 : 3;
+        this.linesAlreadyAnimated = 0;
+
+        this.lineCreationIndex = this.lineCreationIndex == 0 ? 1 : 0;
 
         this.lineCreator.animateLine(lineStartPosition, groundPoint);
     }
 
     onLineAnimated()
     {
-        if (!this.firstLineAnimated)
+        this.linesAlreadyAnimated++;
+
+        if (this.linesAlreadyAnimated == 2 && this.linesToAnimate == 3)
         {
-            this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
-            this.firstLineAnimated = true;
+            this.lineCreator.animateLine(this.groundForwardPoint, this.groundRightPoint);
             return;
         }
 
-        this.firstLineAnimated = false;
+        if (this.linesAlreadyAnimated < 2)
+        {
+            this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
+            return;
+        }
     }
 }
