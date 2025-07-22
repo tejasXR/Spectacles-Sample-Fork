@@ -19,14 +19,14 @@ export class NavigationPathHandler extends BaseScriptComponent {
     @input
     public lineCreator: LineCreator;
 
-    @input
-    public navObject1: SceneObject;
+    // @input
+    // public navObject1: SceneObject;
 
-    @input 
-    public navObject2: SceneObject;
+    // @input 
+    // public navObject2: SceneObject;
 
-     @input 
-    public navObject3: SceneObject;
+    //  @input 
+    // public navObject3: SceneObject;
 
     @input
     camera: Camera;
@@ -41,6 +41,8 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
     private groundPoint : vec3;
     private groundForwardPoint : vec3;
+
+    private lineCreationIndex : number;
 
     constructor()
     {
@@ -100,8 +102,8 @@ export class NavigationPathHandler extends BaseScriptComponent {
  
             var rayEnd = this.handPosition.add(forwardDirection).add(downwardDirection);
 
-            this.navObject1.getTransform().setWorldPosition(lineStartPosition);
-            this.navObject2.getTransform().setWorldPosition(rayEnd);
+            // this.navObject1.getTransform().setWorldPosition(lineStartPosition);
+            // this.navObject2.getTransform().setWorldPosition(rayEnd);
 
             this.navigationWorldDepth.onStartHitTest(lineStartPosition, rayEnd);
 
@@ -112,41 +114,36 @@ export class NavigationPathHandler extends BaseScriptComponent {
 
     onCreateNavPath(groundPoint: vec3, groundNormal: vec3)
     {
-        // Draw points
-
         this.groundPoint = groundPoint;
 
-    
-        // Draw line from hand to ground
-        this.navObject3.getTransform().setWorldPosition(groundPoint);
-
+        // Line to ground
         var lineStartPosition = groundPoint.add(vec3.up().uniformScale(30));
-
         this.lineCreator.createBaseLine(lineStartPosition, groundPoint);
-        // this.lineCreator.animateLine(this.handPosition, groundPoint);
 
+        var groundForward : vec3;
+        if (this.lineCreationIndex == 0)
+        {
+            // Forward Line
+            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth));
+            this.lineCreator.createBaseLine(groundPoint, groundForward);
 
-        // var lookDirection: vec3;
-        // if (1 - Math.abs(groundNormal.normalize().dot(vec3.up())) < .01) 
-        // {
-        //     lookDirection = vec3.forward();
-        // } 
-        // else
-        // {
-        //     lookDirection = groundNormal.cross(vec3.up());
-        // }
+            this.lineCreationIndex = 1;
+        }
+        else
+        {
+            // Forward Line
+            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth / 3));
+            this.lineCreator.createBaseLine(groundPoint, groundForward);
 
-        // lookDirection = groundNormal.cross(vec3.up());
+            // Right Line
+            var groundRight = groundForward.add(vec3.right().uniformScale(this.groundForwardDepth / 3));
+            this.lineCreator.createBaseLine(groundForward, groundRight);
 
-        // const toRotation = quat.lookAt(lookDirection, lookDirection);
-
-        // Draw line from ground hit to ground forward
-        // var groundForward = groundPoint.add(lookDirection.uniformScale(120));
-        var groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth));
-
+            this.lineCreationIndex = 0;
+        }
+      
         this.groundForwardPoint = groundForward;
 
-        this.lineCreator.createBaseLine(groundPoint, groundForward);
         this.lineCreator.animateLine(groundPoint, groundForward);
     }
 

@@ -32,9 +32,6 @@
     groundForwardDepth: false
     lineCreator: false
     mapExpansionController: false
-    navObject1: false
-    navObject2: false
-    navObject3: false
     navigationWorldDepth: false
     rightHand: false
   ScriptTypesHidden:
@@ -46,9 +43,6 @@
       groundForwardDepth: !<float> 0.000000
       navigationWorldDepth: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       lineCreator: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
-      navObject1: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      navObject2: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      navObject3: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
       rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
@@ -59,8 +53,5 @@
     - // @input float groundForwardDepth
     - // @input AssignableType_1 navigationWorldDepth
     - // @input AssignableType_2 lineCreator
-    - // @input SceneObject navObject1
-    - // @input SceneObject navObject2
-    - // @input SceneObject navObject3
     - // @input Component.Camera camera
     - // @input SceneObject rightHand
