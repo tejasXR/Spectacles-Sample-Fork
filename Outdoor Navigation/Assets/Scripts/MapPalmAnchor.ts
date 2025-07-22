@@ -1,5 +1,5 @@
-import { MapController } from "MapComponent/Scripts/MapController";
-import { MapComponent } from "MapComponent/Scripts/MapComponent";
+import { MapExpansionController } from "Scripts/MapExpansionController";
+import { MapAnimator } from "./MapAnimator";
 
 
 @component
@@ -8,7 +8,10 @@ export class MapPalmAnchor extends BaseScriptComponent
     private gestureModule: GestureModule = require('LensStudio:GestureModule');
 
     @input
-    public mapComponent : MapComponent;
+    public mapAnimator : MapAnimator;
+
+    @input
+    public mapExpansionController : MapExpansionController;
 
     @input
     public mapObject: SceneObject;
@@ -21,6 +24,11 @@ export class MapPalmAnchor extends BaseScriptComponent
 
     @input
     public forwardOffset: number;
+
+    @input
+    public mapPositionLerpSpeed: number;
+
+    private isMapVisible : boolean;
     
     constructor()
     {
@@ -30,11 +38,13 @@ export class MapPalmAnchor extends BaseScriptComponent
 
     onStart()
     {
+        this.mapAnimator.onMapVisibilityChanged = (scale : vec3) => this.onMapVisibilityChanged(scale);
+
         this.gestureModule
         .getTargetingDataEvent(GestureModule.HandType.Right)
         .add((targetArgs: TargetingDataArgs) => {
 
-            if (!this.mapComponent.getIsMiniMapOn)
+            if (this.mapExpansionController.hasExpandedMap())
             {
                 return;
             }
@@ -57,10 +67,33 @@ export class MapPalmAnchor extends BaseScriptComponent
             var rightHandUp = this.rightHand.getTransform().up;
             var dotProduct = rightHandUp.dot(vec3.up());
 
-            var isRightPalmUp = dotProduct  < 0;
-            this.mapObject.enabled = isRightPalmUp;
+            var isRightPalmUp = dotProduct < -0.7;
 
-            this.mapObject.getTransform().setWorldPosition(destPoint);
+            if (!this.isMapVisible && isRightPalmUp)
+            {
+                 this.mapAnimator.show();
+            }
+
+            if (this.isMapVisible && !isRightPalmUp)
+            {
+               this.mapAnimator.hide();
+            }
+
+            var mapPosition =  this.mapObject.getTransform().getWorldPosition();
+            var lerpVec = vec3.lerp(mapPosition, destPoint, getDeltaTime() * this.mapPositionLerpSpeed)
+            this.mapObject.getTransform().setWorldPosition(lerpVec);
         });
+    }
+
+    private onMapVisibilityChanged(scale : vec3)
+    {
+        if (scale.x == 0)
+        {
+            this.isMapVisible = false;
+        }
+        else
+        {
+            this.isMapVisible = true;
+        }
     }
 }
