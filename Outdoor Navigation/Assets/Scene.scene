@@ -2022,9 +2022,6 @@
       groundForwardDepth: !<float> 2000.000000
       navigationWorldDepth: !<MappingBased.AssignableType_1> 98613aa3-cfb5-4aa3-b87d-53711e8d8209
       lineCreator: !<MappingBased.AssignableType_2> 5bad31a1-4219-48ee-900d-f4c2f1c0d700
-      navObject1: !<reference.SceneObject> 5563fb78-a854-4bb9-8818-1590065fc268
-      navObject2: !<reference.SceneObject> 77f3708e-cbb6-438a-bbfd-4b8c4b3c6117
-      navObject3: !<reference.SceneObject> fcf83ffb-9d7c-43a7-97cf-d0b2ad47d290
       camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
       rightHand: !<reference.SceneObject> c59ade77-507d-4696-9cd8-fcd244b4152a
   ScriptTypes:
@@ -2216,10 +2213,10 @@
       animatedRenderMesh: !<reference.RenderMesh> e542623c-1432-4bfa-881d-a28905bd9e57
       baseLineMaterial: !<reference.Material> 31149b17-dea1-4de0-b33d-ae7e7b51848f
       animatedLineMaterial: !<reference.Material> 9b071099-b726-411e-bf3d-558d140c6662
-      lineThickness: !<float> 15.000000
-      animatedLineThickness: !<float> 22.000000
-      constantAnimationSpeed: !<float> 150.000000
-      lineFadeDuration: !<float> 7500.000000
+      lineThickness: !<float> 18.000000
+      animatedLineThickness: !<float> 35.000000
+      constantAnimationSpeed: !<float> 200.000000
+      lineFadeDuration: !<float> 10000.000000
   ScriptTypes:
     "":
       {}
