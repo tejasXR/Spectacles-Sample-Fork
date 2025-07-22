@@ -1,0 +1,51 @@
+- !<AssetImportMetadata/90dc56dd-5122-4c70-bb3c-51bec7abb2e3>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 6dcddf1a-b482-4ba1-9f5e-3d5d0a96f724
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 6dcddf1a-b482-4ba1-9f5e-3d5d0a96f724
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> dfe5cd9f-cd86-4d90-9e07-95ec81f301d1
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/dfe5cd9f-cd86-4d90-9e07-95ec81f301d1>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: f65bd62c-13ad-496d-bc97-fa3124dc5f20
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    expansionButtons: false
+    leftHand: false
+    mapComponent: false
+    rightHand: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - leftHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      expansionButtons: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      mapComponent: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input SceneObject leftHand
+    - // @input SceneObject rightHand
+    - // @input SceneObject expansionButtons
+    - // @input AssignableType mapComponent
