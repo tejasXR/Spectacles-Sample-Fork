@@ -144,18 +144,18 @@ export class NavigationPathHandler extends BaseScriptComponent {
       
         this.groundForwardPoint = groundForward;
 
-        this.lineCreator.animateLine(groundPoint, groundForward);
+        this.lineCreator.animateLine(lineStartPosition, groundPoint);
     }
 
     onLineAnimated()
     {
-        // if (!this.firstLineAnimated)
-        // {
-        //     this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
-        //     this.firstLineAnimated = true;
-        //     return;
-        // }
+        if (!this.firstLineAnimated)
+        {
+            this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
+            this.firstLineAnimated = true;
+            return;
+        }
 
-        // this.firstLineAnimated = false;
+        this.firstLineAnimated = false;
     }
 }

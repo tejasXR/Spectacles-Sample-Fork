@@ -66,28 +66,35 @@ export class LineCreator extends BaseScriptComponent {
 
     public animateLine(lineStart: vec3, lineEnd: vec3)
     {
-        var animatedLine = global.scene.createSceneObject("AnimatedLine");
-        var animatedLineMesh = animatedLine.createComponent("RenderMeshVisual");
-        animatedLineMesh.mesh = this.animatedRenderMesh;
-        animatedLineMesh.addMaterial(this.animatedLineMaterial);
-
-        var animatedLineTransform = animatedLine.getTransform();
-        animatedLineTransform.setWorldPosition(lineStart);
+        var line = global.scene.createSceneObject("Line");
+        var lineMesh = line.createComponent("RenderMeshVisual");
+        lineMesh.mesh = this.animatedRenderMesh;
+        lineMesh.addMaterial(this.animatedLineMaterial);
 
         var direction = lineEnd.sub(lineStart);
-        var rotation = quat.rotationFromTo(vec3.forward(), direction.normalize());
-        animatedLineTransform.setWorldRotation(rotation);
+        var length = direction.length;
+
+        var lineTransform = line.getTransform();
+        lineTransform.setWorldPosition(lineStart);
+
+        var lineRotation = quat.rotationFromTo(vec3.up(), direction.normalize());
+        lineTransform.setWorldRotation(lineRotation);
+
+        lineTransform.setWorldScale(new vec3(this.lineThickness, length, 0)); 
 
         var distanceToTravel = lineStart.distance(lineEnd);
         var timeInMillisecondsToTravel = distanceToTravel / this.constantAnimationSpeed * 1000;
 
-        animatedLineTransform.setWorldScale(new vec3(this.animatedLineThickness, 0, this.animatedLineThickness)); 
+        var currentScale = new vec3(this.animatedLineThickness, this.animatedLineThickness, 0);
+        lineTransform.setWorldScale(currentScale); 
+
+        var midPoint = lineStart.add(direction.uniformScale(0.5));
 
         LSTween.moveFromToWorld
         (
-            animatedLineTransform,
-            animatedLineTransform.getWorldPosition(),
-            lineEnd,
+            lineTransform,
+            lineTransform.getWorldPosition(),
+            midPoint,
             timeInMillisecondsToTravel
         )
         .easing(Easing.Linear.InOut)
@@ -96,22 +103,28 @@ export class LineCreator extends BaseScriptComponent {
            if (this.onLineAnimatedCompleted)
             {
                 this.onLineAnimatedCompleted();
-                animatedLine.destroy();
+                line.destroy();
             };
         });
 
+        LSTween.scaleFromToWorld
+        (
+            lineTransform,
+            currentScale,
+            new vec3(this.animatedLineThickness, length, 0),
+            timeInMillisecondsToTravel - 100
+        )
+        .easing(Easing.Linear.InOut)
+        .start();
+
         LSTween.alphaFromTo
         (
-            animatedLineMesh.mainMaterial,
+            lineMesh.mainMaterial,
             1,
             0,
-            this.lineFadeDuration / 2
+            timeInMillisecondsToTravel / 2
         )
         .easing(Easing.Sinusoidal.In)
-        .start()
-        .onComplete(()=>
-        {
-            animatedLine.enabled = false;
-        });
+        .start();
     }
 }
