@@ -13,16 +13,25 @@ export class LineCreator extends BaseScriptComponent {
     animatedRenderMesh : RenderMesh;
 
     @input
+    basePointRenderMesh : RenderMesh;
+
+    @input
     baseLineMaterial : Material;
 
     @input
     animatedLineMaterial : Material;
 
     @input
+    basePointMaterial : Material;
+
+    @input
     lineThickness : number;
 
     @input
     animatedLineThickness : number;
+
+    @input
+    basePointSize : number;
 
     @input("float", "1")
     constantAnimationSpeed: number;
@@ -44,7 +53,8 @@ export class LineCreator extends BaseScriptComponent {
         var lineTransform = line.getTransform();
         lineTransform.setWorldPosition(midPoint);
 
-        var lineRotation = quat.rotationFromTo(vec3.up(), direction.normalize());
+        // var lineRotation = quat.rotationFromTo(vec3.up(), direction.normalize());
+        var lineRotation = quat.lookAt(direction.normalize(), vec3.up());
         lineTransform.setWorldRotation(lineRotation);
 
         lineTransform.setWorldScale(new vec3(this.lineThickness, length, 0)); 
@@ -64,6 +74,48 @@ export class LineCreator extends BaseScriptComponent {
         });
     }
 
+    public addBasePoint(position: vec3, rotation: quat)
+    {
+        var basePoint = global.scene.createSceneObject("Base Point");
+        var basePointMesh = basePoint.createComponent("RenderMeshVisual");
+        basePointMesh.mesh = this.basePointRenderMesh;
+        basePointMesh.addMaterial(this.basePointMaterial);
+
+        var basePointTransform = basePoint.getTransform();
+        basePointTransform.setWorldPosition(position);
+        basePointTransform.setWorldRotation(rotation);
+
+        basePointMesh.setRenderOrder(2);
+
+    
+        var destinationScale = new vec3(this.basePointSize, 0, this.basePointSize);
+        var fadeDuration = 10000;
+
+        LSTween.scaleFromToWorld
+        (
+            basePointTransform,
+            basePointTransform.getWorldScale(),
+            destinationScale,
+            250
+        )
+        .easing(Easing.Back.Out)
+        .start();
+
+        LSTween.alphaFromTo
+        (
+            basePointMesh.mainMaterial,
+            1,
+            0,
+            fadeDuration
+        )
+        .easing(Easing.Sinusoidal.In)
+        .start()
+        .onComplete(()=>
+        {
+          basePoint.destroy();
+        });
+    }
+
     public animateLine(lineStart: vec3, lineEnd: vec3)
     {
         var line = global.scene.createSceneObject("Line");
@@ -77,16 +129,29 @@ export class LineCreator extends BaseScriptComponent {
         var lineTransform = line.getTransform();
         lineTransform.setWorldPosition(lineStart);
 
-        var lineRotation = quat.rotationFromTo(vec3.up(), direction.normalize());
+        var lineRotation = quat.lookAt(direction.normalize(), vec3.up());
+
+
+        var lineRotationAlt = quat.rotationFromTo(vec3.up(), direction.normalize());
+
+                this.addBasePoint(lineStart, lineRotation);
+
+
         lineTransform.setWorldRotation(lineRotation);
 
-        lineTransform.setWorldScale(new vec3(this.lineThickness, length, 0)); 
+        // lineTransform.setWorldScale(new vec3(this.lineThickness, length, 0)); 
+
+        var height = 1;
+        var currentScale = new vec3(this.animatedLineThickness, height, 0);
+        lineTransform.setWorldScale(currentScale); 
+
+        var destinationScale = new vec3(this.animatedLineThickness, height, length);
 
         var distanceToTravel = lineStart.distance(lineEnd);
         var timeInMillisecondsToTravel = distanceToTravel / this.constantAnimationSpeed * 1000;
 
-        var currentScale = new vec3(this.animatedLineThickness, 0, 0);
-        lineTransform.setWorldScale(currentScale); 
+        // var currentScale = new vec3(this.animatedLineThickness, 0, 0);
+        // lineTransform.setWorldScale(currentScale); 
 
         var midPoint = lineStart.add(direction.uniformScale(0.5));
 
@@ -107,7 +172,8 @@ export class LineCreator extends BaseScriptComponent {
         (
             lineTransform,
             currentScale,
-            new vec3(this.animatedLineThickness, length, 0),
+            // new vec3(this.animatedLineThickness, length, 0),
+            destinationScale,
             timeInMillisecondsToTravel
         )
         .easing(Easing.Linear.InOut)

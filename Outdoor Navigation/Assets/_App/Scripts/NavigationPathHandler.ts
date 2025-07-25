@@ -133,7 +133,7 @@ export class NavigationPathHandler extends BaseScriptComponent {
         else
         {
             // Forward Line
-            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth / 2));
+            groundForward = groundPoint.add(vec3.forward().uniformScale(this.groundForwardDepth /4));
             // this.lineCreator.createBaseLine(groundPoint, groundForward);
 
             // Right Line
@@ -145,28 +145,28 @@ export class NavigationPathHandler extends BaseScriptComponent {
         this.groundForwardPoint = groundForward;
         this.groundRightPoint = groundRight;
 
-        this.linesToAnimate = this.lineCreationIndex == 0 ? 2 : 3;
+        this.linesToAnimate = this.lineCreationIndex == 0 ? 1 : 2;
         this.linesAlreadyAnimated = 0;
 
         this.lineCreationIndex = this.lineCreationIndex == 0 ? 1 : 0;
 
-        this.lineCreator.animateLine(lineStartPosition, groundPoint);
+        this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
     }
 
     onLineAnimated()
     {
         this.linesAlreadyAnimated++;
 
-        if (this.linesAlreadyAnimated == 2 && this.linesToAnimate == 3)
+        if (this.linesAlreadyAnimated == 1 && this.linesToAnimate == 2)
         {
             this.lineCreator.animateLine(this.groundForwardPoint, this.groundRightPoint);
             return;
         }
 
-        if (this.linesAlreadyAnimated < 2)
-        {
-            this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
-            return;
-        }
+        // if (this.linesAlreadyAnimated < 1)
+        // {
+        //     this.lineCreator.animateLine(this.groundPoint, this.groundForwardPoint);
+        //     return;
+        // }
     }
 }

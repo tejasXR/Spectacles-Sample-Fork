@@ -32,6 +32,9 @@
     animatedLineThickness: false
     animatedRenderMesh: false
     baseLineMaterial: false
+    basePointMaterial: false
+    basePointRenderMesh: false
+    basePointSize: false
     baseRenderMesh: false
     constantAnimationSpeed: false
     lineFadeDuration: false
@@ -43,10 +46,13 @@
   DefaultScriptInputs:
     - baseRenderMesh: !<reference.RenderMesh> 00000000-0000-0000-0000-000000000000
       animatedRenderMesh: !<reference.RenderMesh> 00000000-0000-0000-0000-000000000000
+      basePointRenderMesh: !<reference.RenderMesh> 00000000-0000-0000-0000-000000000000
       baseLineMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
       animatedLineMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      basePointMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
       lineThickness: !<float> 0.000000
       animatedLineThickness: !<float> 0.000000
+      basePointSize: !<float> 0.000000
       constantAnimationSpeed: !<float> 1.000000
       lineFadeDuration: !<float> 5000.000000
   ScriptTypes:
@@ -55,9 +61,12 @@
   InputLines:
     - // @input Asset.RenderMesh baseRenderMesh
     - // @input Asset.RenderMesh animatedRenderMesh
+    - // @input Asset.RenderMesh basePointRenderMesh
     - // @input Asset.Material baseLineMaterial
     - // @input Asset.Material animatedLineMaterial
+    - // @input Asset.Material basePointMaterial
     - // @input float lineThickness
     - // @input float animatedLineThickness
+    - // @input float basePointSize
     - '// @input float constantAnimationSpeed = "1"'
     - '// @input float lineFadeDuration = "5000"'
