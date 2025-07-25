@@ -31,6 +31,7 @@
     animationTime: false
     button: false
     navigationLines: false
+    otherPinsToHide: false
     tooltipLine: false
     userPin: false
   ScriptTypesHidden:
@@ -44,6 +45,8 @@
         []
       userPin: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       animationTime: !<float> 500.000000
+      otherPinsToHide: !<reference.SceneObject[]>
+        []
   ScriptTypes:
     -
       {}
@@ -53,3 +56,4 @@
     - "// @input Component.RenderMeshVisual[] navigationLines"
     - // @input SceneObject userPin
     - '// @input float animationTime = "500"'
+    - "// @input SceneObject[] otherPinsToHide"

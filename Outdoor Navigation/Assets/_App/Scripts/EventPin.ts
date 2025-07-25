@@ -24,6 +24,9 @@ export class EventPin extends BaseScriptComponent
     @input
     ("float", "500") animationTime: number;
 
+    @input
+    otherPinsToHide: SceneObject[];
+
 
     // @input
     // debugText: Text;
@@ -185,6 +188,11 @@ export class EventPin extends BaseScriptComponent
         this.hide();
         this.fadeAllNavPaths(1);
         this.tooltipLine.enabled = false;
+
+        this.otherPinsToHide.forEach(pin => 
+        {
+            pin.enabled = false;
+        });
 
         this.isSelected = true;
     }
