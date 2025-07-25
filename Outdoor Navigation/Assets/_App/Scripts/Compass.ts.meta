@@ -1,0 +1,48 @@
+- !<AssetImportMetadata/e756dadd-dee7-4611-8725-bdfbdce3bddb>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> c44f8b10-b329-47af-a0c9-277964bdf5e0
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> c44f8b10-b329-47af-a0c9-277964bdf5e0
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 85926414-c60f-4f71-a6b6-a32b1dba79ba
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/85926414-c60f-4f71-a6b6-a32b1dba79ba>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 18b8925d-6041-46a4-9e9e-5844f00ca045
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    handRayDebugObj: false
+    rightHand: false
+    userPin: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - userPin: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      handRayDebugObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input SceneObject userPin
+    - // @input SceneObject handRayDebugObj
+    - // @input SceneObject rightHand
