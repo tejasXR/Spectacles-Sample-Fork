@@ -1,0 +1,57 @@
+- !<AssetImportMetadata/5c923dd7-fed1-4213-9987-c5eefac58f16>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> d77d0374-00e0-4fb3-9b90-333f77943802
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> d77d0374-00e0-4fb3-9b90-333f77943802
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 98780e85-a163-4e9c-a368-f7e3a24d5d59
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/98780e85-a163-4e9c-a368-f7e3a24d5d59>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: c94ea20b-b3fd-4c88-9c04-32143d60879a
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    camera: false
+    groundForwardDepth: false
+    lineCreator: false
+    mapExpansionController: false
+    navigationWorldDepth: false
+    rightHand: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - mapExpansionController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      groundForwardDepth: !<float> 0.000000
+      navigationWorldDepth: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      lineCreator: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType mapExpansionController
+    - // @input float groundForwardDepth
+    - // @input AssignableType_1 navigationWorldDepth
+    - // @input AssignableType_2 lineCreator
+    - // @input Component.Camera camera
+    - // @input SceneObject rightHand
