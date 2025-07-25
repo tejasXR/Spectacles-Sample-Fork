@@ -1,0 +1,55 @@
+- !<AssetImportMetadata/9b36099b-3ae3-4dc3-be03-cc55c7eb3e82>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> e1e115bd-1ec3-4458-853e-c7741455f5e0
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> e1e115bd-1ec3-4458-853e-c7741455f5e0
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 9fa9b78d-31cb-498e-9ae5-c82725af0955
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/9fa9b78d-31cb-498e-9ae5-c82725af0955>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 0040a88b-a944-4faa-9269-2a6f9c3a97c3
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    animationTime: false
+    button: false
+    navigationLines: false
+    tooltipLine: false
+    userPin: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - button: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      tooltipLine: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      navigationLines: !<reference.RenderMeshVisual[]>
+        []
+      userPin: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      animationTime: !<float> 500.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType button
+    - // @input SceneObject tooltipLine
+    - "// @input Component.RenderMeshVisual[] navigationLines"
+    - // @input SceneObject userPin
+    - '// @input float animationTime = "500"'
