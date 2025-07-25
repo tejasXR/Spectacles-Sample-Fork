@@ -38,12 +38,19 @@ export class EventPin extends BaseScriptComponent
 
     private isAnimating : boolean;
     private isSelected : boolean;
+    private originalButtonScale :vec3;
 
     constructor()
     {
         super();
+        this.createEvent('OnAwakeEvent').bind(() => this.onAwake());
         this.createEvent('OnStartEvent').bind(() => this.onStart());
         this.createEvent('UpdateEvent').bind(() => this.onUpdate());
+    }
+
+    onAwake()
+    {
+        this.originalButtonScale = this.button.getTransform().getLocalScale();
     }
 
     onStart()
@@ -57,6 +64,11 @@ export class EventPin extends BaseScriptComponent
     private onUpdate()
     {
         if(this.isAnimating)
+        {
+            return;
+        }
+
+        if (this.isSelected)
         {
             return;
         }
@@ -79,11 +91,8 @@ export class EventPin extends BaseScriptComponent
         }
 
         this.tooltipLine.enabled = true;
-
-        var newScale = vec3.one();
-        this.scaleButton(newScale, Easing.Back.Out);
-
-       this.fadeAllNavPaths(.3);
+        this.scaleButton(this.originalButtonScale, Easing.Back.Out);
+        this.fadeAllNavPaths(.3);
     }
 
     private hide()

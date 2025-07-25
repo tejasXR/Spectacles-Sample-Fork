@@ -1,0 +1,57 @@
+- !<AssetImportMetadata/ecef347f-4411-4640-8d5f-601baf3894fa>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 32e4ace4-48dc-41a6-a7f1-29658f6ef81f
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 32e4ace4-48dc-41a6-a7f1-29658f6ef81f
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 4f118b5b-b7e8-406f-b7dc-f23ac6625126
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/4f118b5b-b7e8-406f-b7dc-f23ac6625126>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 3c0942ed-1e4e-412f-8372-fa4d5c7088c7
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    forwardOffset: false
+    heightOffset: false
+    mapAnimator: false
+    mapObject: false
+    mapPositionLerpSpeed: false
+    rightHand: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - mapAnimator: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      mapObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      rightHand: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      heightOffset: !<float> 0.000000
+      forwardOffset: !<float> 0.000000
+      mapPositionLerpSpeed: !<float> 0.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType mapAnimator
+    - // @input SceneObject mapObject
+    - // @input SceneObject rightHand
+    - // @input float heightOffset
+    - // @input float forwardOffset
+    - // @input float mapPositionLerpSpeed
