@@ -1402,9 +1402,9 @@
   Enabled: true
   Layers: 1
   LocalTransform:
-    position: {x: 0.000000, y: 1.710548, z: 0.000000}
+    position: {x: 0.000000, y: 2.403904, z: 0.000000}
     rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
-    scale: {x: 0.075000, y: 3.000000, z: 0.075000}
+    scale: {x: 0.075000, y: 4.700000, z: 0.075000}
     hasSegmentScaleCompensation: false
   Children:
     []
@@ -2554,6 +2554,9 @@
         - !<reference> 610a226f-dd58-4ab1-890a-72cc1fb425ab
       userPin: !<reference.SceneObject> 5c38bdf1-fb6f-46c9-b7b0-6c57ee9f753b
       animationTime: !<float> 150.000000
+      otherPinsToHide: !<reference.SceneObject[]>
+        - !<reference> 0c7ab547-94c8-45b1-8cf2-3a0976101401
+        - !<reference> 310264db-b315-4653-aec1-2fd28f10552d
   ScriptTypes:
     "":
       {}
@@ -6926,10 +6929,13 @@
     "":
       baseRenderMesh: !<reference.RenderMesh> e542623c-1432-4bfa-881d-a28905bd9e57
       animatedRenderMesh: !<reference.RenderMesh> e542623c-1432-4bfa-881d-a28905bd9e57
+      basePointRenderMesh: !<reference.RenderMesh> e542623c-1432-4bfa-881d-a28905bd9e57
       baseLineMaterial: !<reference.Material> 31149b17-dea1-4de0-b33d-ae7e7b51848f
       animatedLineMaterial: !<reference.Material> 9b071099-b726-411e-bf3d-558d140c6662
-      lineThickness: !<float> 18.000000
-      animatedLineThickness: !<float> 17.000000
+      basePointMaterial: !<reference.Material> 532c5810-f0d1-4a69-afb4-fc7fbeffe4a6
+      lineThickness: !<float> 30.000000
+      animatedLineThickness: !<float> 12.000000
+      basePointSize: !<float> 40.000000
       constantAnimationSpeed: !<float> 500.000000
       lineFadeDuration: !<float> 10000.000000
   ScriptTypes:
@@ -8385,6 +8391,9 @@
         - !<reference> 6338cf55-659f-45da-95cb-00011ccc314e
       userPin: !<reference.SceneObject> 5c38bdf1-fb6f-46c9-b7b0-6c57ee9f753b
       animationTime: !<float> 250.000000
+      otherPinsToHide: !<reference.SceneObject[]>
+        - !<reference> 0c7ab547-94c8-45b1-8cf2-3a0976101401
+        - !<reference> 12a84924-7c77-4555-a5a7-9eebd12b288c
   ScriptTypes:
     "":
       {}
@@ -9439,9 +9448,9 @@
   Enabled: true
   Layers: 1
   LocalTransform:
-    position: {x: 0.000000, y: 1.733307, z: 0.000000}
+    position: {x: 0.000000, y: 2.426662, z: 0.000000}
     rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
-    scale: {x: 0.075000, y: 3.000000, z: 0.075000}
+    scale: {x: 0.075000, y: 4.700000, z: 0.075000}
     hasSegmentScaleCompensation: false
   Children:
     []
@@ -14659,9 +14668,9 @@
   Enabled: true
   Layers: 1
   LocalTransform:
-    position: {x: 0.000000, y: 1.710548, z: 0.000000}
+    position: {x: 0.000000, y: 2.403904, z: 0.000000}
     rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
-    scale: {x: 0.075000, y: 3.000000, z: 0.075000}
+    scale: {x: 0.075000, y: 4.700000, z: 0.075000}
     hasSegmentScaleCompensation: false
   Children:
     []
@@ -19931,6 +19940,9 @@
         - !<reference> 97981f41-c186-4856-97f9-0226a2b2810f
       userPin: !<reference.SceneObject> 5c38bdf1-fb6f-46c9-b7b0-6c57ee9f753b
       animationTime: !<float> 150.000000
+      otherPinsToHide: !<reference.SceneObject[]>
+        - !<reference> 310264db-b315-4653-aec1-2fd28f10552d
+        - !<reference> 12a84924-7c77-4555-a5a7-9eebd12b288c
   ScriptTypes:
     "":
       {}
@@ -20646,7 +20658,7 @@
   PrefabRemaps:
     []
   Name: Line Creator
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: -130.000000}
